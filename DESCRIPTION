@@ -1,0 +1,9 @@
+Package: shinythings
+Type: Package
+Title: Inputs and outputs for Shiny apps
+Version: 1.0
+Date: 2014-07-25
+Author: Duane Currier
+Maintainer: Duane Currier <duane.currie@stjude.org>
+Description: Shiny Things makes various input and output components and widgets available for Shiny applications.  New inputs include a password input field.  Outputs include a suite of NVD3 outputs.
+License: GPL-3
