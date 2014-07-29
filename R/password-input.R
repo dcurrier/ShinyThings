@@ -1,7 +1,10 @@
 #' Password Input
 #' 
 #' Creates a password input element that obscures any text entered.  The value is 
-#' not encrypted before transmission to the server.
+#' not encrypted before transmission to the server.  This is intended to provide 
+#' the look and feel of typical password field to those who know that there is 
+#' absolutely NO SECURITY in using it within your app.  The data transmitted is 
+#' PLAIN, UNENCRYPTED TEXT.
 #' 
 #' @param inputId Specifies the input slot that will be used to access the 
 #'   value.
