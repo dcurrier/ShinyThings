@@ -23,33 +23,49 @@
 #'   
 #' @export
 actionButton <- function(inputId, label, styleclass = "", size = "", 
-    block = F, icon = NULL, icon.library = c("font awesome", "bootstrap"),  css.class = "", ...) {
-    if (styleclass %in% c("primary", "info", "success", "warning", 
-        "danger", "inverse", "link")) {
-        btn.css.class <- paste("btn", styleclass, sep = "-")
-    } else btn.css.class = ""
-    
-    if (size %in% c("large", "small", "mini")) {
-        btn.size.class <- paste("btn", size, sep = "-")
-    } else btn.size.class = ""
-    
-    if (block) {
-        btn.block = "btn-block"
-    } else btn.block = ""
-    
-    if (!is.null(icon)) {
-        if( !(icon.library[1] %in% c("font awesome", "bootstrap")) ){
-          icon.set = "font awesome"
-        }else{
-          icon.set = icon.library[1]
-        }
-        set = switch(icon.set,
-                     "font awesome" = "fa fa-",
-                     "bootstrap" = "icon-")
-        icon.code <- HTML(paste0("<i class='", set, icon, "'></i>"))
-    } else icon.code = ""
-    
-    tags$button(id = inputId, type = "button", class = paste("btn action-button", 
-        btn.css.class, btn.size.class, btn.block, css.class, collapse = " "), 
-        icon.code, label, ...)
+                         block = F, icon = NULL, icon.library = c("font awesome", "bootstrap"),  
+                         css.class = "", ...) {
+ 
+  
+  if (styleclass %in% c("primary", "info", "success", "warning", 
+                        "danger", "inverse", "link")) {
+    btn.css.class <- paste("btn", styleclass, sep = "-")
+  } else btn.css.class = ""
+  
+  if (size %in% c("large", "small", "mini")) {
+    btn.size.class <- paste("btn", size, sep = "-")
+  } else btn.size.class = ""
+  
+  if (block) {
+    btn.block = "btn-block"
+  } else btn.block = ""
+  
+  if (!is.null(icon)) {
+    if( !(icon.library[1] %in% c("font awesome", "bootstrap")) ){
+      icon.set = "font awesome"
+    }else{
+      icon.set = icon.library[1]
+    }
+    set = switch(icon.set,
+                 "font awesome" = "fa fa-",
+                 "bootstrap" = "icon-")
+    icon.code <- HTML(paste0("<i class='", set, icon, "'></i>"))
+  } else icon.code = ""
+  
+  tagList(
+  # This makes web page load the CSS file in the HTML head.
+  # The call to singleton ensures it's only included once
+  # in a page.
+  singleton(
+    tags$head(
+      tags$link(rel = "stylesheet", 
+                type = "text/css", 
+                href = "shared/font-awesome/css/font-awesome.min.css")
+      )
+    ),
+
+  tags$button(id = inputId, type = "button", class = paste("btn action-button", 
+              btn.css.class, btn.size.class, btn.block, css.class, collapse = " "), 
+              icon.code, label, ...)
+  )
 } 

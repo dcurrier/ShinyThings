@@ -23,7 +23,7 @@ passwordInput <- function(inputId, label, value = "") {
     # in a page.
     shiny::singleton(
       shiny::tags$head(
-        shiny::tags$script(src = "password-input-binding.js")
+        shiny::tags$script(src = "shinythings/passwordInput-bindings.js")
       )
     ),
     shiny::tags$label(label, `for` = inputId),

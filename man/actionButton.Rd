@@ -37,8 +37,8 @@ Icons can be included in your buttons by specifying the \code{icon} argument. Tw
 Using the \code{css.class} argument additional CSS classes can be supplied for the button.  For example, 'fa-spin' will cause the icon to rotate and 'fa-flip-horizontal' will flip the icon horizontally.  Using 'fa-lg', 'fa-2x', 'fa-3x', 'fa-4x', and 'fa-5x' will produce larger icons.  For more examples see \url{http:www.fontawesome.io/examples/}.
 }
 \seealso{
-Other ShinyThings.elements: \code{\link{passwordInput}};
-Related packages: \code{shinysky}, \code{shiny}
+Other ShinyThings elements: \code{\link[shinythings]{passwordInput}};
+Related packages: \code{\link[shinysky]{shinysky}}, \code{\link[shiny]{shiny}}
 }
 
 \examples{
