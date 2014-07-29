@@ -29,7 +29,6 @@ actionButton(inputId, label, styleclass = "", size = "",
   
   \item{css.class}{Any additional CSS class one wishes to add to the action button supplied as a character string}
 }
-}
 \details{
 The \code{styleclass}, \code{size}, and \code{block} arguments enable the button class to be set according to the default Bootstrap button classes (\url{http://getbootstrap.com/2.3.2/base-css.html#buttons}).  
 
