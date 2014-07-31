@@ -60,7 +60,8 @@ actionButton <- function(inputId, label, styleclass = "", size = "",
     tags$head(
       tags$link(rel = "stylesheet", 
                 type = "text/css", 
-                href = "shared/font-awesome/css/font-awesome.min.css")
+                href = "shared/font-awesome/css/font-awesome.min.css"),
+      tags$script(src = "shinythings/actionButton-bindings.js")
       )
     ),
 
@@ -69,3 +70,21 @@ actionButton <- function(inputId, label, styleclass = "", size = "",
               icon.code, label, ...)
   )
 } 
+
+
+#' updateActionButton
+#' 
+#' Used in server.R. Show an alert placed in ui.R with shinyalert
+#' 
+#' @param id Specifies the alert id that will be used to access the
+#'   
+#' @family ShinyThings elements
+#'   
+#' @seealso actionButton
+#' 
+#'   
+#' @export
+updateActionButton <- function(session, inputId, value=NULL) {
+  message <- dropNulls(list(value = value))
+  session$sendInputMessage(inputId, message)
+}

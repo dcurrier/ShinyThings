@@ -10,6 +10,14 @@ shinyServer(function(input, output, session) {
     return(paste("Password Entered: ",isolate(input$pass), sep=""))
   })
   
+  output$buttonValue = renderText({
+    input$reset
+    return(paste0("Button Value: ", input$Test))
+  })
   
+  observe({
+    input$reset
+    updateActionButton(session, 'Test', value=0)
+  })
   
 })
