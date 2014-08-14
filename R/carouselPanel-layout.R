@@ -87,7 +87,7 @@ carouselPanel <- function(..., auto.advance=FALSE){
     div(id=paste0("carousel-", n), class="carousel slide", `data-interval`=tolower(as.character(auto.advance)),  
         # Coursel Inner Div - contains the content to display
         div(class="carousel-inner",
-            div(class="item active", contents[[1]], style="padding: 0px 70px;"),
+            div(class="item active", contents[[1]], style="padding: 0px 70px 30px;"),
             mapply(function(elm){
                 list(div(class="item", elm, style="padding: 0px 70px;"))
             }, contents[2:length(contents)], SIMPLIFY=F, USE.NAMES=F)),
