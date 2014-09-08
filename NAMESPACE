@@ -2,6 +2,8 @@
 
 export(actionButton)
 export(carouselPanel)
+export(modalButton)
+export(modalPanel)
 export(numericInput)
 export(passwordInput)
 export(updateActionButton)

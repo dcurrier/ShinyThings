@@ -24,7 +24,8 @@ also use any other HTML, like an image.}
 Creates a numeric input element
 }
 \seealso{
-Other ShinyThings elements: \code{\link{passwordInput}};
+Other ShinyThings elements: \code{\link{modalButton}};
+  \code{\link{passwordInput}};
   \code{\link{updateActionButton}};
   \code{\link{updatePasswordInput}}
 }

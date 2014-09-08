@@ -14,8 +14,8 @@ Used in server.R. Show an alert placed in ui.R with shinyalert
 \seealso{
 actionButton
 
-Other ShinyThings elements: \code{\link{numericInput}};
-  \code{\link{passwordInput}};
+Other ShinyThings elements: \code{\link{modalButton}};
+  \code{\link{numericInput}}; \code{\link{passwordInput}};
   \code{\link{updatePasswordInput}}
 }
 

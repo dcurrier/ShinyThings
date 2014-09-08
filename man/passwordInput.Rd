@@ -22,7 +22,8 @@ absolutely NO SECURITY in using it within your app.  The data transmitted is
 PLAIN, UNENCRYPTED TEXT.
 }
 \seealso{
-Other ShinyThings elements: \code{\link{numericInput}};
+Other ShinyThings elements: \code{\link{modalButton}};
+  \code{\link{numericInput}};
   \code{\link{updateActionButton}};
   \code{\link{updatePasswordInput}}
 }

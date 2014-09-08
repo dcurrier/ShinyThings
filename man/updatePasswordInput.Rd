@@ -20,8 +20,8 @@ also use any other HTML, like an image.}
 Updates a password input element.
 }
 \seealso{
-Other ShinyThings elements: \code{\link{numericInput}};
-  \code{\link{passwordInput}};
+Other ShinyThings elements: \code{\link{modalButton}};
+  \code{\link{numericInput}}; \code{\link{passwordInput}};
   \code{\link{updateActionButton}}
 }
 
