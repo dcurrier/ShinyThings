@@ -37,4 +37,4 @@ $.extend(numberInputBinding, Shiny.textInputBinding, {
              step:  Number(el.step) };
   }
 });
-inputBindings.register(numberInputBinding, 'shiny.numberInput');
+Shiny.inputBindings.register(numberInputBinding, 'shiny.numberInput');
