@@ -1,5 +1,5 @@
 var numberInputBinding = {};
-$.extend(numberInputBinding, textInputBinding, {
+$.extend(numberInputBinding, Shiny.textInputBinding, {
   find: function(scope) {
     return $(scope).find('input[type="number"]');
   },
