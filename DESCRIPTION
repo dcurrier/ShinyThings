@@ -9,3 +9,4 @@ Description: Shiny Things makes various input and output components and widgets
     available for Shiny applications.  New inputs include a password input
     field.  Outputs include a suite of NVD3 outputs.
 License: GPL-3
+Imports: shiny
