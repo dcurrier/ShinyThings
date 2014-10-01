@@ -3,6 +3,7 @@
   display: inline-block;
   overflow: hidden;
   position: relative;
+  padding-bottom: 3px;
 }
 .file-wrapper input {
   cursor: pointer;

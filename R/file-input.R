@@ -1,7 +1,7 @@
 #' File Upload Control
 #'
 #' Create a file upload control that can be used to upload one or more files.  This 
-#' input incorporates method of Trevor Davis to allow the 'Browse' button to be styled: 
+#' input incorporates the method of Trevor Davis to allow the 'Browse' button to be styled: 
 #' \url{https://gist.github.com/davist11/645816}  
 #'
 #' Whenever a file upload completes, the corresponding input variable is set
@@ -30,15 +30,38 @@
 #'   Internet Explorer 9 and earlier.}
 #' @param accept A character vector of MIME types; gives the browser a hint of
 #'   what kind of files the server is expecting.
-#' @param styleclass A character vector containing a Bootstrap button class: 
-#'  "primary", "info", "success", "warning", "danger", "inverse", "link".
+#' @param style A character vector containing a Bootstrap style class: 
+#'  "", primary", "info", "success", "warning", "danger", "inverse", "link".
+#' @param barStyle A character vector containing a Bootstrap style class: 
+#'  "", primary", "info", "success", "warning", "danger", "inverse", "link".
+#'  
+#'  @examples
+#'   \dontrun{
+#'   # In server.R
+#'   output$distPlot <- renderPlot({
+#'     # Take a dependency on input$goButton
+#'     input$goButton
+#'
+#'     # Use isolate() to avoid dependency on input$obs
+#'     dist <- isolate(rnorm(input$obs))
+#'     hist(dist)
+#'   })
+#'
+#'   # In ui.R
+#'    actionButton("goButton", "Go!", icon="space-shuttle", style="success")
+#'   }   
 #'
 #' @export
-fileInput <- function(inputId, label, multiple = FALSE, accept = NULL, styleclass = NULL) {
-  styleclass <- match.arg(styleclass, c("primary", "info", "success", "warning", 
-                                         "danger", "inverse", "link"))
-  buttonClass <- paste0("btn btn-", styleclass, " browse-btn")
+fileInput <- function(inputId, label, multiple = FALSE, accept = NULL, style = NULL, barStyle = NULL) {
+  style <- match.arg(style, c("", "primary", "info", "success", "warning", "danger", "inverse", "link"))
+  barStyle <- if( is.null(barStyle) ) style else match.arg(barStyle, c("", "primary", "info", "success", "warning", "danger", "inverse", "link"))
+  barClass <- if(style != "") paste0(" progress-", barStyle) else ""
+  
+  buttonClass <- paste0("btn btn-", style, " browse-btn")
   buttonTag <- tags$button(class=buttonClass, "Browse")
+  
+  fileHolderTag <- tags$span(class="file-holder", "No file selected")
+  
   inputTag <- tags$input(id = inputId, name = inputId, type = "file")
   if (multiple)
     inputTag$attribs$multiple <- "multiple"
@@ -49,13 +72,12 @@ fileInput <- function(inputId, label, multiple = FALSE, accept = NULL, styleclas
     tags$head(
       singleton(tags$script(src="shinythings/fileInput-script.js", type="text/javascript")),
       singleton(tags$link(rel = "stylesheet", type="text/css", 
-                          href="shinythings/fileInput-style.css"))
-    ),
+                          href="shinythings/fileInput-style.css")) ),
     label %AND% tags$label(label),
-    tags$span(class="file-wrapper", inputTag, buttonTag),
+    tags$span(class="file-wrapper", inputTag, buttonTag, fileHolderTag),
     tags$div(
       id=paste(inputId, "_progress", sep=""),
-      class="progress progress-striped active shiny-file-input-progress",
+      class=paste0("progress progress-striped active shiny-file-input-progress", barClass),
       tags$div(class="bar"),
       tags$label()
     )

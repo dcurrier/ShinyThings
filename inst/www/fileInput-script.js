@@ -8,11 +8,7 @@ SITE.fileInputs = function() {
   $button = $this.siblings('.browse-btn'),
   $fakeFile = $this.siblings('.file-holder');
   if(newVal !== '') {
-    if($fakeFile.length === 0) {
-      $button.after('<span class="file-holder">' + newVal + '</span>');
-    } else {
-      $fakeFile.text(newVal);
-    }
+    $fakeFile.text(newVal);
   }
 };
 

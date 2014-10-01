@@ -1,4 +1,4 @@
-#' Action button
+#' Action button/link
 #' 
 #' Creates an action button whose value is initially zero, and increments by one
 #' each time it is pressed.
@@ -7,67 +7,66 @@
 #'   value.
 #' @param label The contents of the button--usually a text label, but you could 
 #'   also use any other HTML, like an image.
-#' @param styleclass The Bootstrap styling class of the button--options are 
+#' @param style The Bootstrap style of the button--options are 
 #'   primary, info, success, warning, danger, inverse, link or blank
 #' @param size The size of the button--options are large, small, mini
-#' @param block Whehter the button should fill the block
-#' @param icon Display an icon for the button
+#' @param block Whether the button should fill the block
+#' @param icon An optional \code{\link{icon}} to appear on the button.
 #' @param specify icon set to use
 #'   \url{http://www.fontawesome.io/icons} or
 #'   \url{http://getbootstrap.com/2.3.2/base-css.html#icons}
-#' @param css.class Any additional CSS class one wishes to add to the action 
+#' @param class Any additional CSS class one wishes to add to the action 
 #'   button
-#'   
-#' @family ShinySky elements
-#'   
-#'   
+#' @param ... Named attributes to be applied to the button or link.
+#'
+#' @family input elements
+#'
+#' @examples
+#' \dontrun{
+#' # In server.R
+#' output$distPlot <- renderPlot({
+#'   # Take a dependency on input$goButton
+#'   input$goButton
+#'
+#'   # Use isolate() to avoid dependency on input$obs
+#'   dist <- isolate(rnorm(input$obs))
+#'   hist(dist)
+#' })
+#'
+#' # In ui.R
+#' actionButton("goButton", "Go!", icon="space-shuttle", style="success")
+#' }   
 #' @export
-actionButton <- function(inputId, label, styleclass = "", size = "", 
-                         block = F, icon = NULL, icon.library = c("font awesome", "bootstrap"),  
-                         css.class = "", ...) {
+actionButton <- function(inputId, label, style = c("", "primary", "info", "success", "warning", 
+                         "danger", "inverse", "link"), size = c("", "large", "small", "mini"), block = F, icon = NULL, 
+                         icon.library = c("font awesome", "bootstrap"), class = "", ...) {
  
   
-  if (styleclass %in% c("primary", "info", "success", "warning", 
-                        "danger", "inverse", "link")) {
-    btn.css.class <- paste("btn", styleclass, sep = "-")
-  } else btn.css.class = ""
+  style <- match.arg(style, c("", "primary", "info", "success", "warning", "danger", "inverse", "link"))
+  btn.css.class <- if( style != "" ) paste("btn", style, sep = "-") else style
   
-  if (size %in% c("large", "small", "mini")) {
-    btn.size.class <- paste("btn", size, sep = "-")
-  } else btn.size.class = ""
+  size <- match.arg(size, c("", "large", "small", "mini"))
+  btn.size.class <- if(size != "") paste("btn", size, sep = "-") else size
   
-  if (block) {
-    btn.block = "btn-block"
-  } else btn.block = ""
+  btn.block <- if (block) "btn-block" else ""
   
+  icon.set <- match.arg(icon.library, c("font awesome", "bootstrap"))
   if (!is.null(icon)) {
-    if( !(icon.library[1] %in% c("font awesome", "bootstrap")) ){
-      icon.set = "font awesome"
-    }else{
-      icon.set = icon.library[1]
-    }
-    set = switch(icon.set,
+    set <- switch(icon.set,
                  "font awesome" = "fa fa-",
                  "bootstrap" = "icon-")
     icon.code <- HTML(paste0("<i class='", set, icon, "'></i>"))
-  } else icon.code = ""
+  } else icon.code <- ""
   
   tagList(
-  # This makes web page load the CSS file in the HTML head.
-  # The call to singleton ensures it's only included once
-  # in a page.
-  singleton(
     tags$head(
-      tags$link(rel = "stylesheet", 
-                type = "text/css", 
-                href = "shared/font-awesome/css/font-awesome.min.css"),
-      tags$script(src = "shinythings/actionButton-bindings.js")
-      )
+      singleton(tags$link(rel = "stylesheet", type = "text/css", href = "shared/font-awesome/css/font-awesome.min.css")),
+      singleton(tags$script(src = "shinythings/actionButton-bindings.js"))
     ),
-
-  tags$button(id = inputId, type = "button", class = paste("btn action-button", 
-              btn.css.class, btn.size.class, btn.block, css.class, collapse = " "), 
-              icon.code, label, ...)
+    
+    tags$button(id = inputId, type = "button", 
+                class = paste("btn action-button", btn.css.class, btn.size.class, btn.block, class, collapse = " "), 
+                icon.code, label, ...)
   )
 } 
 
