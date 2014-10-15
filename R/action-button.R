@@ -7,12 +7,12 @@
 #'   value.
 #' @param label The contents of the button--usually a text label, but you could 
 #'   also use any other HTML, like an image.
-#' @param style The Bootstrap style of the button--options are 
+#' @param type The Bootstrap style of the button--options are 
 #'   primary, info, success, warning, danger, inverse, link or blank
 #' @param size The size of the button--options are large, small, mini
 #' @param block Whether the button should fill the block
 #' @param icon An optional \code{\link{icon}} to appear on the button.
-#' @param specify icon set to use
+#' @param icon.library specify icon set to use
 #'   \url{http://www.fontawesome.io/icons} or
 #'   \url{http://getbootstrap.com/2.3.2/base-css.html#icons}
 #' @param class Any additional CSS class one wishes to add to the action 
@@ -34,16 +34,16 @@
 #' })
 #'
 #' # In ui.R
-#' actionButton("goButton", "Go!", icon="space-shuttle", style="success")
+#' actionButton("goButton", "Go!", icon="space-shuttle", type="success")
 #' }   
 #' @export
-actionButton <- function(inputId, label, style = c("", "primary", "info", "success", "warning", 
+actionButton <- function(inputId, label, type = c("", "primary", "info", "success", "warning", 
                          "danger", "inverse", "link"), size = c("", "large", "small", "mini"), block = F, icon = NULL, 
                          icon.library = c("font awesome", "bootstrap"), class = "", ...) {
  
   
-  style <- match.arg(style, c("", "primary", "info", "success", "warning", "danger", "inverse", "link"))
-  btn.css.class <- if( style != "" ) paste("btn", style, sep = "-") else style
+  type <- match.arg(type, c("", "primary", "info", "success", "warning", "danger", "inverse", "link"))
+  btn.css.class <- if( type != "" ) paste("btn", type, sep = "-") else type
   
   size <- match.arg(size, c("", "large", "small", "mini"))
   btn.size.class <- if(size != "") paste("btn", size, sep = "-") else size
